@@ -14,19 +14,6 @@ interface UserHeading {
   dietary: string[];
 }
 
-const FAKE_USERS: UserHeading[] = [
-  { nickname: 'priya', avatarColor: '#FCAF38', restaurantId: 'araya-s-place', dietary: ['vegetarian'] },
-  { nickname: 'omar', avatarColor: '#50A3A4', restaurantId: 'aladdin-gyro-cery', dietary: ['halal'] },
-  { nickname: 'mei', avatarColor: '#F95335', restaurantId: 'xi-an-noodles', dietary: ['vegan'] },
-  { nickname: 'kai', avatarColor: '#674A40', restaurantId: 'thai-tom', dietary: ['vegetarian', 'gluten-free'] },
-  { nickname: 'sofia', avatarColor: '#FCAF38', restaurantId: 'guanaco-s-tacos-pupuseria', dietary: [] },
-  { nickname: 'james', avatarColor: '#50A3A4', restaurantId: 'local-point', dietary: ['gluten-free'] },
-  { nickname: 'anika', avatarColor: '#F95335', restaurantId: 'taste-of-india', dietary: ['vegetarian', 'halal'] },
-  { nickname: 'dex', avatarColor: '#674A40', restaurantId: 'chipotle', dietary: [] },
-  { nickname: 'luna', avatarColor: '#50A3A4', restaurantId: 'broadfork-caf', dietary: ['vegan', 'gluten-free'] },
-  { nickname: 'rio', avatarColor: '#FCAF38', restaurantId: 'shawarma-king', dietary: ['halal'] },
-];
-
 const DIET_TAG_COLORS: Record<string, string> = {
   vegetarian: '#50A3A4',
   vegan: '#5BB974',
@@ -115,7 +102,7 @@ export default function MapPage() {
     let cancelled = false;
 
     async function load() {
-      const users = [...FAKE_USERS];
+      const users: UserHeading[] = [];
       let realUser: UserHeading | null = null;
 
       // Read localStorage

@@ -19,6 +19,24 @@
   text-align: center;
 }
 
+// Quiz link
+.quizLink {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.875rem 2rem;
+  background: $orange;
+  color: $white;
+  font-family: $font-mono;
+  font-size: 0.9rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.12em;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $brown;
+  }
+}
+
 // Counter
 .counter {
   font-family: $font-mono;

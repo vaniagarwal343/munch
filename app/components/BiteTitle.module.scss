@@ -34,134 +34,13 @@
   color: $orange;
 }
 
-// ── Bite mark ──
-// Multiple overlapping circles → jagged, organic cookie-bite shape
+// Single clean circular bite mark
 .bite {
   position: absolute;
-  top: -8%;
-  right: 18%;
-  animation: biteReveal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-// Main chomp
-.biteMain {
-  width: clamp(28px, 4vw, 52px);
-  height: clamp(28px, 4vw, 52px);
+  top: -2%;
+  right: 17%;
+  width: clamp(28px, 4vw, 50px);
+  height: clamp(28px, 4vw, 50px);
   border-radius: 50%;
   background: $cream;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-// Secondary tooth marks for jagged edge
-.biteSec1 {
-  width: clamp(16px, 2.5vw, 30px);
-  height: clamp(16px, 2.5vw, 30px);
-  border-radius: 50%;
-  background: $cream;
-  position: absolute;
-  top: clamp(14px, 2vw, 26px);
-  left: clamp(-10px, -1.5vw, -18px);
-}
-
-.biteSec2 {
-  width: clamp(14px, 2vw, 26px);
-  height: clamp(14px, 2vw, 26px);
-  border-radius: 50%;
-  background: $cream;
-  position: absolute;
-  top: clamp(-6px, -1vw, -12px);
-  left: clamp(18px, 2.5vw, 34px);
-}
-
-.biteSec3 {
-  width: clamp(10px, 1.5vw, 20px);
-  height: clamp(10px, 1.5vw, 20px);
-  border-radius: 50%;
-  background: $cream;
-  position: absolute;
-  top: clamp(24px, 3.5vw, 44px);
-  left: clamp(8px, 1.2vw, 16px);
-}
-
-// ── Crumb particles ──
-.crumbOrigin {
-  position: absolute;
-  top: 5%;
-  right: 15%;
-  pointer-events: none;
-}
-
-.crumb0,
-.crumb1,
-.crumb2,
-.crumb3,
-.crumb4 {
-  position: absolute;
-  border-radius: 50%;
-  background: $brown;
-  opacity: 0;
-}
-
-.crumb0 {
-  width: 6px;
-  height: 6px;
-  animation: crumbFly0 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.crumb1 {
-  width: 4px;
-  height: 4px;
-  animation: crumbFly1 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
-}
-
-.crumb2 {
-  width: 5px;
-  height: 5px;
-  animation: crumbFly2 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
-}
-
-.crumb3 {
-  width: 3px;
-  height: 3px;
-  animation: crumbFly3 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.03s forwards;
-}
-
-.crumb4 {
-  width: 4px;
-  height: 4px;
-  animation: crumbFly4 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-}
-
-// ── Keyframes ──
-@keyframes biteReveal {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes crumbFly0 {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(30px, -28px) scale(0); opacity: 0; }
-}
-
-@keyframes crumbFly1 {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(48px, -18px) scale(0); opacity: 0; }
-}
-
-@keyframes crumbFly2 {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(36px, 14px) scale(0); opacity: 0; }
-}
-
-@keyframes crumbFly3 {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(55px, -32px) scale(0); opacity: 0; }
-}
-
-@keyframes crumbFly4 {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(42px, 22px) scale(0); opacity: 0; }
 }
