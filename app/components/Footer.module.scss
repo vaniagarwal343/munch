@@ -1,0 +1,23 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.footer {
+  background: $cream;
+}
+
+.stripe {
+  @include stripe;
+}
+
+.inner {
+  @include container;
+  padding-top: $space-md;
+  padding-bottom: $space-md;
+
+  p {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: $muted;
+  }
+}

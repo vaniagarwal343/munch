@@ -1,0 +1,43 @@
+// Colors
+$brown: #674A40;
+$teal: #50A3A4;
+$amber: #FCAF38;
+$orange: #F95335;
+$cream: #FFFAF5;
+$white: #FFFFFF;
+$border: rgba($brown, 0.12);
+$muted: rgba($brown, 0.5);
+
+// Typography
+$font-primary: 'Outfit', sans-serif;
+$font-mono: 'IBM Plex Mono', monospace;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+$line-height-body: 1.65;
+$letter-spacing-heading: -0.02em;
+$letter-spacing-mono: 0.15em;
+
+// Spacing
+$space-xs: 0.5rem;
+$space-sm: 1rem;
+$space-md: 1.5rem;
+$space-lg: 2.5rem;
+$space-xl: 4rem;
+$space-2xl: 6rem;
+
+// Breakpoints
+$bp-mobile: 480px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+$bp-wide: 1280px;
+
+// Layout
+$container-max: 1100px;
+$container-pad: 48px;
+$container-pad-mobile: 24px;
+
+// Radius — sharp edges
+$radius: 2px;

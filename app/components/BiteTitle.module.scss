@@ -1,0 +1,132 @@
+@use '../styles/variables' as *;
+
+.wrap {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.title {
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: $font-weight-black;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0;
+  user-select: none;
+}
+
+.hero .title {
+  font-size: clamp(5rem, 12vw, 9rem);
+}
+
+.large .title {
+  font-size: clamp(4rem, 10vw, 7rem);
+}
+
+.dot {
+  color: $orange;
+}
+
+// Bite — overlapping circles that create organic cookie-bite shape
+.bite {
+  position: absolute;
+  top: -2%;
+  right: 16%;
+  animation: biteReveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+// Main bite circle
+.circle1 {
+  width: clamp(30px, 4.5vw, 54px);
+  height: clamp(30px, 4.5vw, 54px);
+  border-radius: 50%;
+  background: $cream;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Lower-left overlap
+.circle2 {
+  width: clamp(22px, 3vw, 38px);
+  height: clamp(22px, 3vw, 38px);
+  border-radius: 50%;
+  background: $cream;
+  position: absolute;
+  top: clamp(18px, 2.5vw, 32px);
+  left: clamp(-8px, -1vw, -14px);
+}
+
+// Upper-right overlap
+.circle3 {
+  width: clamp(20px, 2.8vw, 34px);
+  height: clamp(20px, 2.8vw, 34px);
+  border-radius: 50%;
+  background: $cream;
+  position: absolute;
+  top: clamp(-8px, -1.2vw, -14px);
+  left: clamp(20px, 3vw, 36px);
+}
+
+// Small fill circle between the gaps
+.circle4 {
+  width: clamp(14px, 2vw, 24px);
+  height: clamp(14px, 2vw, 24px);
+  border-radius: 50%;
+  background: $cream;
+  position: absolute;
+  top: clamp(10px, 1.5vw, 18px);
+  left: clamp(14px, 2vw, 24px);
+}
+
+// Crumb particles
+.crumbs {
+  position: absolute;
+  top: 2%;
+  right: 14%;
+  pointer-events: none;
+}
+
+.crumb {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: $brown;
+  opacity: 0;
+  animation: crumbFly 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
+}
+
+// Keyframes
+@keyframes biteReveal {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes crumbFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--cx), var(--cy)) scale(0);
+    opacity: 0;
+  }
+}

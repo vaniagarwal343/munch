@@ -1,0 +1,201 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.resultsPage {
+  min-height: 100vh;
+  background: $cream;
+  padding-top: calc(60px + #{$space-lg});
+  padding-bottom: $space-xl;
+}
+
+.container {
+  @include container;
+}
+
+.monoLabel {
+  @include mono-label;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.header {
+  margin-bottom: $space-lg;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.15rem;
+  font-weight: $font-weight-medium;
+  color: $brown;
+}
+
+.greetingAvatar {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: $font-weight-bold;
+  color: $white;
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  gap: $space-sm;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  background: $white;
+  border: 1px solid $border;
+  padding: $space-md;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $brown;
+  }
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rank {
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  font-weight: $font-weight-medium;
+  color: $muted;
+}
+
+.matchBadge {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: $font-weight-semibold;
+  color: $teal;
+}
+
+.cardName {
+  font-size: 1.15rem;
+  margin-top: 0.25rem;
+}
+
+.cuisineLabel {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $muted;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: $muted;
+  line-height: 1.55;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  font-weight: $font-weight-medium;
+  letter-spacing: 0.05em;
+  border: 1px solid $border;
+  color: $brown;
+  padding: 0.15rem 0.5rem;
+}
+
+.dietTag {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  font-weight: $font-weight-medium;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba($amber, 0.4);
+  color: darken($amber, 20%);
+  padding: 0.15rem 0.5rem;
+}
+
+.headingBtn {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.1em;
+  color: $orange;
+  text-align: left;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $brown;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: $space-xl 0;
+
+  h2 {
+    margin-bottom: $space-xs;
+  }
+
+  p {
+    color: $muted;
+    margin: 0 auto $space-md;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $space-md;
+  margin-top: $space-lg;
+  align-items: center;
+}
+
+.retakeBtn {
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  font-weight: $font-weight-medium;
+  letter-spacing: 0.1em;
+  color: $muted;
+  text-transform: uppercase;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $brown;
+  }
+}
+
+.mapBtn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.1em;
+  background: $brown;
+  color: $white;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #000;
+  }
+}

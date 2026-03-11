@@ -1,0 +1,108 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: $cream;
+  border-bottom: 1px solid $border;
+}
+
+.stripe {
+  @include stripe;
+}
+
+.inner {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: $font-weight-black;
+  letter-spacing: $letter-spacing-heading;
+  color: $brown;
+}
+
+.menuToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  position: relative;
+
+  @include responsive(tablet) {
+    display: none;
+  }
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: $brown;
+  position: relative;
+  transition: background 0.2s;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: $brown;
+    transition: transform 0.2s;
+  }
+
+  &::before { top: -6px; }
+  &::after { top: 6px; }
+
+  &.open {
+    background: transparent;
+    &::before { transform: translateY(6px) rotate(45deg); }
+    &::after { transform: translateY(-6px) rotate(-45deg); }
+  }
+}
+
+.links {
+  display: none;
+  gap: $space-md;
+
+  @include responsive(tablet) {
+    display: flex;
+    align-items: center;
+  }
+
+  &.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: $cream;
+    padding: $space-md $container-pad-mobile;
+    gap: $space-sm;
+    border-bottom: 1px solid $border;
+  }
+
+  li a {
+    font-family: $font-mono;
+    font-size: 0.8rem;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}

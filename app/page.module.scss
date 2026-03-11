@@ -1,0 +1,190 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.page {
+  padding-top: 60px;
+}
+
+// Shared
+.monoLabel {
+  @include mono-label;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+// Hero
+.hero {
+  border-bottom: 1px solid $border;
+}
+
+.heroInner {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+  padding-top: $space-xl;
+  padding-bottom: $space-xl;
+
+  @include responsive(desktop) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $space-2xl;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.heroLeft {
+  flex: 1 1 55%;
+}
+
+.biteTitleWrap {
+  margin-bottom: 1.25rem;
+}
+
+.headline {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: $font-weight-black;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 1.25rem;
+}
+
+.accent {
+  color: $orange;
+}
+
+.heroSub {
+  font-size: 1rem;
+  color: $muted;
+  line-height: $line-height-body;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: $brown;
+  color: $white;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.12em;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #000;
+  }
+}
+
+.heroRight {
+  flex: 1 1 40%;
+}
+
+.pullQuote {
+  border-left: 3px solid $orange;
+  padding-left: 1.25rem;
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: $brown;
+    margin-bottom: 0.75rem;
+  }
+
+  cite {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-style: normal;
+    color: $muted;
+    letter-spacing: 0.05em;
+  }
+}
+
+// Sections
+.section {
+  border-bottom: 1px solid $border;
+}
+
+.sectionInner {
+  @include container;
+  padding-top: $space-xl;
+  padding-bottom: $space-xl;
+}
+
+.sectionHeader {
+  margin-bottom: $space-lg;
+}
+
+.rule {
+  height: 1px;
+  background: $border;
+  margin-top: 0.75rem;
+}
+
+// Steps
+.steps {
+  display: grid;
+  gap: $space-md;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-lg;
+  }
+}
+
+.step {
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: $muted;
+    line-height: $line-height-body;
+  }
+}
+
+.stepNum {
+  display: block;
+  font-family: $font-mono;
+  font-size: 2.5rem;
+  font-weight: $font-weight-medium;
+  color: rgba($brown, 0.08);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+// Testimonials
+.testimonials {
+  display: grid;
+  gap: $space-md;
+
+  @include responsive(tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-lg;
+  }
+}
+
+.testimonial {
+  border-left: 3px solid $teal;
+  padding-left: 1.25rem;
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $brown;
+    margin-bottom: 0.75rem;
+  }
+
+  cite {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-style: normal;
+    color: $muted;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+@mixin responsive($bp) {
+  @if $bp == mobile {
+    @media (max-width: $bp-tablet - 1) { @content; }
+  } @else if $bp == tablet {
+    @media (min-width: $bp-tablet) { @content; }
+  } @else if $bp == desktop {
+    @media (min-width: $bp-desktop) { @content; }
+  } @else if $bp == wide {
+    @media (min-width: $bp-wide) { @content; }
+  }
+}
+
+@mixin container {
+  max-width: $container-max;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 $container-pad-mobile;
+  @include responsive(tablet) {
+    padding: 0 $container-pad;
+  }
+}
+
+@mixin mono-label {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-mono;
+  color: $muted;
+}
+
+@mixin stripe {
+  display: flex;
+  height: 4px;
+  span {
+    flex: 1;
+    &:nth-child(1) { background: $brown; }
+    &:nth-child(2) { background: $teal; }
+    &:nth-child(3) { background: $amber; }
+    &:nth-child(4) { background: $orange; }
+  }
+}
