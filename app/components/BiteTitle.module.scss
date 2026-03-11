@@ -4,7 +4,7 @@
   position: relative;
   display: inline-block;
   opacity: 0;
-  transform: scale(0.92);
+  transform: scale(0.9);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 
   &.visible {
@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-size: clamp(5rem, 12vw, 9rem);
+  font-size: clamp(5rem, 14vw, 10rem);
   font-weight: $font-weight-black;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -23,7 +23,7 @@
 }
 
 .hero .title {
-  font-size: clamp(5rem, 12vw, 9rem);
+  font-size: clamp(5rem, 14vw, 10rem);
 }
 
 .large .title {
@@ -34,18 +34,19 @@
   color: $orange;
 }
 
-// Bite — overlapping circles that create organic cookie-bite shape
+// ── Bite mark ──
+// Multiple overlapping circles → jagged, organic cookie-bite shape
 .bite {
   position: absolute;
-  top: -2%;
-  right: 16%;
-  animation: biteReveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  top: -8%;
+  right: 18%;
+  animation: biteReveal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-// Main bite circle
-.circle1 {
-  width: clamp(30px, 4.5vw, 54px);
-  height: clamp(30px, 4.5vw, 54px);
+// Main chomp
+.biteMain {
+  width: clamp(28px, 4vw, 52px);
+  height: clamp(28px, 4vw, 52px);
   border-radius: 50%;
   background: $cream;
   position: absolute;
@@ -53,80 +54,114 @@
   left: 0;
 }
 
-// Lower-left overlap
-.circle2 {
-  width: clamp(22px, 3vw, 38px);
-  height: clamp(22px, 3vw, 38px);
+// Secondary tooth marks for jagged edge
+.biteSec1 {
+  width: clamp(16px, 2.5vw, 30px);
+  height: clamp(16px, 2.5vw, 30px);
   border-radius: 50%;
   background: $cream;
   position: absolute;
-  top: clamp(18px, 2.5vw, 32px);
-  left: clamp(-8px, -1vw, -14px);
+  top: clamp(14px, 2vw, 26px);
+  left: clamp(-10px, -1.5vw, -18px);
 }
 
-// Upper-right overlap
-.circle3 {
-  width: clamp(20px, 2.8vw, 34px);
-  height: clamp(20px, 2.8vw, 34px);
+.biteSec2 {
+  width: clamp(14px, 2vw, 26px);
+  height: clamp(14px, 2vw, 26px);
   border-radius: 50%;
   background: $cream;
   position: absolute;
-  top: clamp(-8px, -1.2vw, -14px);
-  left: clamp(20px, 3vw, 36px);
+  top: clamp(-6px, -1vw, -12px);
+  left: clamp(18px, 2.5vw, 34px);
 }
 
-// Small fill circle between the gaps
-.circle4 {
-  width: clamp(14px, 2vw, 24px);
-  height: clamp(14px, 2vw, 24px);
+.biteSec3 {
+  width: clamp(10px, 1.5vw, 20px);
+  height: clamp(10px, 1.5vw, 20px);
   border-radius: 50%;
   background: $cream;
   position: absolute;
-  top: clamp(10px, 1.5vw, 18px);
-  left: clamp(14px, 2vw, 24px);
+  top: clamp(24px, 3.5vw, 44px);
+  left: clamp(8px, 1.2vw, 16px);
 }
 
-// Crumb particles
-.crumbs {
+// ── Crumb particles ──
+.crumbOrigin {
   position: absolute;
-  top: 2%;
-  right: 14%;
+  top: 5%;
+  right: 15%;
   pointer-events: none;
 }
 
-.crumb {
+.crumb0,
+.crumb1,
+.crumb2,
+.crumb3,
+.crumb4 {
   position: absolute;
-  width: var(--size);
-  height: var(--size);
   border-radius: 50%;
   background: $brown;
   opacity: 0;
-  animation: crumbFly 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
 }
 
-// Keyframes
+.crumb0 {
+  width: 6px;
+  height: 6px;
+  animation: crumbFly0 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.crumb1 {
+  width: 4px;
+  height: 4px;
+  animation: crumbFly1 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+
+.crumb2 {
+  width: 5px;
+  height: 5px;
+  animation: crumbFly2 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+}
+
+.crumb3 {
+  width: 3px;
+  height: 3px;
+  animation: crumbFly3 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.03s forwards;
+}
+
+.crumb4 {
+  width: 4px;
+  height: 4px;
+  animation: crumbFly4 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+// ── Keyframes ──
 @keyframes biteReveal {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.12);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes crumbFly {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate(var(--cx), var(--cy)) scale(0);
-    opacity: 0;
-  }
+@keyframes crumbFly0 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(30px, -28px) scale(0); opacity: 0; }
+}
+
+@keyframes crumbFly1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(48px, -18px) scale(0); opacity: 0; }
+}
+
+@keyframes crumbFly2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(36px, 14px) scale(0); opacity: 0; }
+}
+
+@keyframes crumbFly3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(55px, -32px) scale(0); opacity: 0; }
+}
+
+@keyframes crumbFly4 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(42px, 22px) scale(0); opacity: 0; }
 }

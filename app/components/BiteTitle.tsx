@@ -13,7 +13,7 @@ export default function BiteTitle({ size = 'hero' }: BiteTitleProps) {
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 300);
-    const t2 = setTimeout(() => setPhase(2), 1300);
+    const t2 = setTimeout(() => setPhase(2), 1800);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -26,24 +26,24 @@ export default function BiteTitle({ size = 'hero' }: BiteTitleProps) {
         munch<span className={styles.dot}>.</span>
       </h1>
 
-      {/* Bite mark — overlapping circles */}
+      {/* Bite marks — multiple overlapping circles for jagged bite shape */}
       {phase >= 2 && (
         <div className={styles.bite}>
-          <div className={styles.circle1} />
-          <div className={styles.circle2} />
-          <div className={styles.circle3} />
-          <div className={styles.circle4} />
+          <div className={styles.biteMain} />
+          <div className={styles.biteSec1} />
+          <div className={styles.biteSec2} />
+          <div className={styles.biteSec3} />
         </div>
       )}
 
-      {/* Crumb particles */}
+      {/* Crumb particles flying off on bite */}
       {phase >= 2 && (
-        <div className={styles.crumbs}>
-          <span className={styles.crumb} style={{ '--cx': '32px', '--cy': '-28px', '--delay': '0s', '--size': '6px' } as React.CSSProperties} />
-          <span className={styles.crumb} style={{ '--cx': '50px', '--cy': '-14px', '--delay': '0.04s', '--size': '4px' } as React.CSSProperties} />
-          <span className={styles.crumb} style={{ '--cx': '22px', '--cy': '-42px', '--delay': '0.07s', '--size': '5px' } as React.CSSProperties} />
-          <span className={styles.crumb} style={{ '--cx': '44px', '--cy': '8px', '--delay': '0.02s', '--size': '3px' } as React.CSSProperties} />
-          <span className={styles.crumb} style={{ '--cx': '56px', '--cy': '-34px', '--delay': '0.1s', '--size': '4px' } as React.CSSProperties} />
+        <div className={styles.crumbOrigin}>
+          <span className={styles.crumb0} />
+          <span className={styles.crumb1} />
+          <span className={styles.crumb2} />
+          <span className={styles.crumb3} />
+          <span className={styles.crumb4} />
         </div>
       )}
     </div>
