@@ -8,84 +8,56 @@ import { QuizAnswers } from '../quiz/quizData';
 import { supabase } from '../../lib/supabase';
 import styles from './results.module.scss';
 
-function parseClosingHour(hours: string): number {
-  const timeMatches = hours.match(/(\d{1,2})(:\d{2})?\s*(am|pm)/gi);
-  if (!timeMatches) return 0;
-  const last = timeMatches[timeMatches.length - 1];
-  const m = last.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)/i);
-  if (!m) return 0;
-  let h = parseInt(m[1]);
-  const period = m[3].toLowerCase();
-  if (period === 'am' && h < 6) h += 24;
-  else if (period === 'pm' && h !== 12) h += 12;
-  else if (period === 'am' && h === 12) h = 0;
-  return h;
-}
+function passesHardFilters(r: Restaurant, answers: QuizAnswers): boolean {
+  // Budget filter
+  const budget = answers.budget as string;
+  if (budget === 'under-8') {
+    if (r.price !== '$') return false;
+  } else if (budget === '8-15') {
+    if (r.price !== '$' && r.price !== '$') return false;
+  } else if (budget === '15-25') {
+    if (r.price !== '$' && r.price !== '$$') return false;
+  }
+  // "any" = no filtering
 
-function cuisineMatches(restaurantCuisine: string, userPick: string): boolean {
-  const c = restaurantCuisine.toLowerCase();
-  if (userPick === 'mediterranean') return c.includes('mediterranean') || c.includes('egyptian');
-  if (userPick === 'indian') return c.includes('indian');
-  if (userPick === 'thai') return c.includes('thai');
-  if (userPick === 'mexican') return c.includes('mexican');
-  if (userPick === 'chinese') return c.includes('chinese');
-  if (userPick === 'american') return c.includes('american');
-  if (userPick === 'salvadoran') return c.includes('salvadoran');
-  if (userPick === 'cafe') return c === 'cafe' || c === 'gastropub';
-  if (userPick === 'dining-hall') return c === 'dining-hall' || c === 'food-court' || c === 'grab-and-go';
-  return false;
+  // Distance filter
+  const distance = answers.distance as string;
+  if (distance === '5') {
+    if (r.walkMinutes > 5) return false;
+  } else if (distance === '10') {
+    if (r.walkMinutes > 10) return false;
+  } else if (distance === '20') {
+    if (r.walkMinutes > 20) return false;
+  }
+  // "any" = no filtering
+
+  return true;
 }
 
 function scoreRestaurant(r: Restaurant, answers: QuizAnswers): number {
   let score = 0;
 
+  // Dietary: +3 per matching tag
   const dietary = (answers.dietary as string[]) || [];
-  if (dietary.includes('none') || dietary.length === 0) {
-    score += 3;
-  } else {
+  if (!dietary.includes('none') && dietary.length > 0) {
     const matches = dietary.filter((d) => r.tags.includes(d)).length;
-    if (matches === dietary.length) score += 5;
-    else if (matches > 0) score += 2;
-    else return -1;
+    if (matches === 0) return -1; // must match at least one dietary need
+    score += matches * 3;
   }
 
+  // Cuisine: +2 per match
   const cuisines = (answers.cuisine as string[]) || [];
-  if (cuisines.includes('any') || cuisines.length === 0) {
-    score += 2;
+  if (!cuisines.includes('any') && cuisines.length > 0) {
+    if (cuisines.includes(r.cuisine)) {
+      score += 2;
+    }
   } else {
-    const hasMatch = cuisines.some((c) => cuisineMatches(r.cuisine, c));
-    if (hasMatch) score += 3;
+    score += 2; // "anything goes" gets base points
   }
 
+  // Vibe: +1 for match
   const vibe = answers.vibe as string;
-  if (vibe === 'late-night') {
-    const closing = parseClosingHour(r.hours);
-    if (closing >= 23) score += 2;
-  } else if (vibe === 'quick') {
-    if (r.type === 'market' || r.cuisine === 'grab-and-go' || r.price === '$') score += 2;
-  } else if (vibe === 'cafe') {
-    if (r.cuisine === 'cafe' || r.cuisine === 'gastropub') score += 2;
-  } else if (vibe === 'group') {
-    if (r.price === '$$' || r.cuisine.includes('indian') || r.cuisine.includes('mediterranean')) score += 2;
-  } else if (vibe === 'casual') {
-    if (r.type !== 'market') score += 1;
-  }
-
-  const budget = answers.budget as string;
-  if (budget === 'any') {
-    score += 1;
-  } else if (budget === r.price) {
-    score += 2;
-  } else if (budget === '$$' && r.price === '$') {
-    score += 1;
-  }
-
-  const distance = answers.distance as string;
-  if (distance === 'any') {
-    score += 1;
-  } else if (distance === 'on-campus' && r.zone === 'on-campus') {
-    score += 1;
-  } else if (distance === 'nearby') {
+  if (vibe && r.vibe.includes(vibe)) {
     score += 1;
   }
 
@@ -115,20 +87,23 @@ function ResultsContent() {
 
   const initial = nickname ? nickname[0].toUpperCase() : '?';
 
+  // Calculate max possible score for percentage
+  const dietaryAnswers = (answers.dietary as string[]) || [];
+  const hasDietary = dietaryAnswers.length > 0 && !dietaryAnswers.includes('none');
+  const maxPossible = (hasDietary ? dietaryAnswers.length * 3 : 0) + 2 + 1;
+
   const scored = restaurants
+    .filter((r) => passesHardFilters(r, answers))
     .map((r) => ({ restaurant: r, score: scoreRestaurant(r, answers) }))
     .filter((r) => r.score > 0)
     .sort((a, b) => b.score - a.score);
 
   const topMatches = scored.slice(0, 8);
-  const maxPossible = 13;
 
   async function handleHeading(restaurantId: string) {
-    // Save to localStorage as fallback
     const data = { nickname, avatarColor, dietary, restaurantId };
     localStorage.setItem('munch-heading', JSON.stringify(data));
 
-    // Insert into supabase
     try {
       const { data: userData } = await supabase
         .from('users')

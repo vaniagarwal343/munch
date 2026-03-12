@@ -228,7 +228,7 @@ export default function MapPage() {
       const activeFilters = Array.from(filters);
       const matchesFilter =
         activeFilters.length === 0 ||
-        activeFilters.some((f) => r.tags.includes(f));
+        activeFilters.every((f) => r.tags.includes(f));
       const dimmed = activeFilters.length > 0 && !matchesFilter;
 
       const size = hasUsers ? 36 : 28;
