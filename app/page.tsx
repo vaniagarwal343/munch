@@ -8,18 +8,24 @@ const TESTIMONIALS = [
       'i rarely eat on campus nowadays. the dining halls just don\u2019t have options for my religious dietary needs.',
     attribution: 'hindu student',
     color: '#50A3A4',
+    sourceUrl:
+      'https://thecrimsonwhite.com/80309/culture/how-inclusive-are-uas-dining-halls-students-with-dietary-restrictions-have-complaints/',
   },
   {
     quote:
       'there are international students who came from arab countries and they can\u2019t find access to halal meat on campus.',
     attribution: 'muslim student association president',
     color: '#FCAF38',
+    sourceUrl:
+      'https://www.oudaily.com/news/students-with-health-based-religion-based-dietary-restrictions-face-lack-of-dining-accommodations-on-campus/article_45fbb370-a09d-11ec-a9a5-8370ead23288.html',
   },
   {
     quote:
       'i\u2019ll check what\u2019s listed online before going, and then they\u2019re not actually serving it.',
     attribution: 'uw junior',
     color: '#F95335',
+    sourceUrl:
+      'https://www.dailyuw.com/article/beyond-the-plate-nutrition-variety-and-student-voices-in-uw-dining-20250519',
   },
 ];
 
@@ -114,7 +120,14 @@ export default function Home() {
                 className={styles.testimonial}
                 style={{ borderLeftColor: t.color }}
               >
-                <p>&ldquo;{t.quote}&rdquo;</p>
+                <a
+                  href={t.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.testimonialLink}
+                >
+                  <p>&ldquo;{t.quote}&rdquo;</p>
+                </a>
                 <cite>{t.attribution}</cite>
               </blockquote>
             ))}
